@@ -1,70 +1,152 @@
-# Getting Started with Create React App
+# CSS TIPS Template uno
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. responsive design
 
-## Available Scripts
+```css
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+```
 
-In the project directory, you can run:
+## 2. grid system for 3 columns the min-width is 300px
 
-### `npm start`
+```css
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  margin-top: 100px;
+`;
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. centering a div
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```css
+position: absolute;
+top: 50%; // for vertical centering
+left: 50%;
+/* right 50% */ // for horizontal centering
+transform: translate(-50%, -50%);
+```
 
-### `npm test`
+### 4. background image
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```css
+export const Landing1 = styled.div`
+  position: relative;
+  background-image: ${(props) => `url(${props.imgUrl})`};
+  background-size: cover;
+  height: calc(100vh - 77.2px);
+  `;
+```
 
-### `npm run build`
+### 5. for icon next to text
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```css
+export const Containermain = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  `;
+export const Text = styled.div`
+  flex: 1;
+`;
+  .icon {
+    flex-basis: 60px;
+    font-size: 35px;
+    color: #10cab7;
+  }
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 6. IMAGES --> 100% width and height auto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```css
+export const Image = styled.img`
+  width: 100%;
+  /* height: auto; */
+`;
+```
 
-### `npm run eject`
+## 7. hr line
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```css
+.about .about-content .text hr {
+  width: 50%;
+  display: inline-block;
+  border-color: var(--main-color);
+}
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 8. Center an image
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```css
+export const Image = styled.div`
+  /* display: block; */
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 50%; */
+  /* div around the image */
+`;
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+### 9. grid area
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```css
+.page {
+  height: 100vh;
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 50px auto 50px;
+  grid-template-areas:
+    "logo logo nav nav nav nav nav nav nav nav"
+    "cont cont cont cont cont cont cont . side side"
+    "foot foot foot foot foot foot foot foot foot foot";
+}
+h2 {
+  grid-area: logo;
+  background-color: red;
+  color: white;
+}
+nav {
+  grid-area: nav;
+  background-color: blue;
+  color: white;
+}
+section {
+  grid-area: cont;
+  background-color: yellow;
+  color: white;
+}
+aside {
+  grid-area: side;
+  background-color: green;
+  color: white;
+}
+footer {
+  grid-area: foot;
+  background-color: black;
+  color: white;
+}
+```
